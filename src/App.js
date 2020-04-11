@@ -11,6 +11,7 @@ import {
 import {
   AutosFilterPage,
   InSizeFilterPage,
+  SignInPage,
 } from './pages';
 
 import {
@@ -31,17 +32,11 @@ function App() {
         component={AutosFilterPage}
       />
 
-      {/*<Route
+      <Route
         exact
-        path="/freight"
-        component={}
-      />*/}
-
-      {/*<Route
-        exact
-        path="/special"
-        component={}
-      />*/}
+        path="/sign_in"
+        component={SignInPage}
+      />
 
       <Route
         exact

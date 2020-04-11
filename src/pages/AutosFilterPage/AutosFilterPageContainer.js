@@ -17,12 +17,11 @@ export default compose(
   withState('filterChoose', 'setFilterChoose', null),
   lifecycle({
     componentWillMount() {
-      axios.get('http://localhost:8080/autos')
-        .then(response => this.props.setAutosInfo(response.data))
-        .then(() => {
-          axios.get('http://localhost:8080/filters')
-            .then(response => this.props.setFiltersInfo(response.data))
-        });
+      axios.post('http://localhost:8080/auth', {
+        email: 'test',
+        password: 'test'
+      })
+        .then(response => console.log('response', response)).catch(error => window.location.pathname = 'sign_in');
     }
   })
 )(AutosFilterPageView);
