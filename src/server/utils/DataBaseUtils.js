@@ -8,7 +8,12 @@ const find = (model, filters = {}) => {
   return model.find(filters);
 };
 
+const findOne = (model, filters = {}) => {
+  return model.findOne(filters);
+};
+
 module.exports = {
   connection,
   find,
+  findOne
 };

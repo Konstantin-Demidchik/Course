@@ -2,6 +2,7 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 //подключение базы данных, MongoDB
 const db = require('./utils/DataBaseUtils');
 // подключение модуля cors, для реализации запросов с других доменов
@@ -12,6 +13,7 @@ const controllers = require('./controllers');
 
 const passport = require('passport');
 
+const middlewares = require('./middlewares');
 
 const app = express();
 
@@ -22,8 +24,10 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
+//app.use(cookieParser());
 
-app.get('/autos', controllers.autos.findAutos);
+app.get('/autos', middlewares.checkToken, controllers.autos.findAutos);
+
 
 /*app.post('/login',
   passport.authenticate('local'),
@@ -33,9 +37,11 @@ app.get('/autos', controllers.autos.findAutos);
     res.redirect('/users/');
 });*/
 
-app.post('/login', controllers.user.findUserByEmail)
+app.post('/auth', controllers.user.auth);
 
-app.get('/filters', controllers.filters.findFilters);
+app.get('/filters', middlewares.checkToken, controllers.filters.findFilters);
+
+app.get('/create', controllers.user.createUser);
 // создание локального сервера на порте 8080 и подключение MongoDB
 const server = app.listen(8080, () => {
   console.log('Server is started');
