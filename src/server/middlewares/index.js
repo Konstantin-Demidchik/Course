@@ -1,11 +1,13 @@
 const jsonwebtoken = require('jsonwebtoken');
 const config = require('../config');
+
 //Check token
  const checkToken = (req, res, next) => {
+  console.log(req.cookies)
   const token = req.cookies[config.auth_header];
 
   if (!token) {
-    return res.status(401).json({error: {message: 'JSON error'}});
+    return res.status(401).json({error: {message: 'Not found token'}});
   }
 
   try {
@@ -13,7 +15,7 @@ const config = require('../config');
     req.token = tokenVerify;
     next();
   } catch (err) {
-    return res.status(401).json({error: {message: 'JSON error'}});
+    return res.status(401).json({error: {message: 'Token incorrect'}});
   }
 };
 
