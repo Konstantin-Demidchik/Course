@@ -13,7 +13,7 @@ const findUserByEmail = (req, res, next) => {
     });
 };
 
-/*const auth = (req, res, next) => {
+const auth = (req, res, next) => {
 
   const { email, password } = req.body;
   if (!email || !password) {
@@ -29,7 +29,7 @@ const findUserByEmail = (req, res, next) => {
             name: user.name
           }
           const token = jsonwebtoken.sign(dataToken, config.jwt_secret, { expiresIn: config.expires_in });
-          res.cookie('test', 'test');
+          res.cookie(config.auth_header, token);
           return res.json({
             token
           });
@@ -42,11 +42,8 @@ const findUserByEmail = (req, res, next) => {
       return res.status(400).json({error: {message: 'User not found'}});
     }
   })
-}; */
-const auth = (req, res, next) => {
-  res.cookie('test', 'test');
-  return res.json({cookie: true});
 };
+
 const createUser = (req, res, next) => {
   return models.user.create({
     email: 'test',

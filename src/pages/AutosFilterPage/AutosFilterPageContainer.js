@@ -17,11 +17,18 @@ export default compose(
   withState('filterChoose', 'setFilterChoose', null),
   lifecycle({
     componentWillMount() {
+      axios.get('http://localhost:8080/autos', { withCredentials: true })
+        .then(data => console.log(data))
+        .catch(error => console.log(error));
+  
+      /*
       axios.post('http://localhost:8080/auth', {
         email: 'test',
         password: 'test'
-      })
-        .then(response => console.log('response', response)).catch(error => window.location.pathname = 'sign_in');
+      }, { withCredentials: true })
+        .then(response => console.log('response', response))
+        //.catch(error => window.location.pathname = 'sign_in');
+      */
     }
   })
 )(AutosFilterPageView);
