@@ -8,9 +8,4 @@ import axios from 'axios';
 
 import SignInPageView from './SignInPageView';
 
-export default compose(
-  lifecycle({
-    componentWillMount() {
-    }
-  })
-)(SignInPageView);
+export default SignInPageView;
